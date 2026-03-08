@@ -1,0 +1,32 @@
+name: Hangzhou Weather Bot
+
+on:
+  schedule:
+    # 每天北京时间早上 7:30 运行 (UTC 时间 23:30)
+    # 格式：分 时 日 月 周 (UTC)
+    - cron: '30 23 * * *'
+  workflow_dispatch: # 允许手动在 GitHub 页面点击运行
+
+jobs:
+  check-weather:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Weather Script
+        env:
+          # 将 GitHub Secret 映射为环境变量
+          AMAP_API_KEY: ${{ secrets.AMAP_API_KEY }}
+        run: python weather_bot.py
