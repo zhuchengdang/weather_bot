@@ -24,7 +24,7 @@ def get_weather_data():
         "extensions": "base"
     }
 
-    response = requests.get(url, params=params, timeout=10)
+    response = requests.get(url, params=params, timeout=30)
     response.raise_for_status()
     data = response.json()
 
