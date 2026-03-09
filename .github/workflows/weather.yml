@@ -10,7 +10,7 @@ on:
 jobs:
   check-weather:
     runs-on: ubuntu-latest
-    
+    timezone: Asia/Shanghai
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
