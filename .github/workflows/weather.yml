@@ -10,7 +10,7 @@ on:
 jobs:
   check-weather:
     runs-on: ubuntu-latest
-    timezone: Asia/Shanghai
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,6 +24,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Set timezone to Asia/Shanghai
+        run: sudo timedatectl set-timezone Asia/Shanghai
 
       - name: Run Weather Script
         env:
